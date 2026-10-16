@@ -9,3 +9,4 @@
 - 수업 범위: 일차함수·이차함수 탐구와 다항함수 자유 탐구입니다.
 
 `dist/area-explorer-offline.html`은 CSS와 JavaScript를 포함하므로 인터넷 연결 없이 사용할 수 있습니다.
+

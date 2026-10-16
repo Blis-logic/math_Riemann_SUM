@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10182a">
+    <meta name="description" content="일차함수와 이차함수의 그래프 아래 넓이를 직사각형으로 나누어 탐구하는 인터랙티브 수학 미션">
+    <title>넓이 탐험대 | 구분구적법</title>
+    <style>
+:root{color-scheme:dark;--bg:#10182a;--panel:#182338;--panel2:#202d43;--line:#34445d;--muted:#9aa8ba;--text:#f5f7fb;--mint:#8ce5c3;--mint2:#56c9a1;--coral:#ffb68e;--lav:#c6b6ff;--font:'Manrope','Gowun Dodum',sans-serif;--ko:'Gowun Dodum','Malgun Gothic',sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 50% -10%,#22314c 0,transparent 42%),var(--bg);color:var(--text);font-family:var(--font),var(--ko);font-size:15px;line-height:1.6;min-width:320px}button,input{font:inherit}button{color:inherit}.app-shell{width:min(1120px,calc(100% - 48px));margin:0 auto}.topbar{height:74px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #2c3a50}.brand{display:flex;align-items:center;gap:11px;color:var(--text);font-size:15px;font-weight:800;letter-spacing:-.04em;text-decoration:none}.brand-mark{height:24px;width:24px;border:1px solid #699e99;border-radius:8px;display:flex;align-items:end;justify-content:center;gap:2px;padding:5px}.brand-mark span{width:3px;border-radius:3px 3px 1px 1px;background:var(--mint)}.brand-mark span:nth-child(1){height:6px}.brand-mark span:nth-child(2){height:10px}.brand-mark span:nth-child(3){height:14px}.class-tag{font-family:var(--ko);font-size:12px;color:#b3bfd0;display:flex;align-items:center;gap:8px}.live-dot{width:7px;height:7px;background:var(--mint);border-radius:50%;box-shadow:0 0 0 4px #8ce5c31a}.intro{padding:62px 0 28px;max-width:740px}.eyebrow{font:500 10px 'DM Mono',monospace;letter-spacing:.13em;color:#9fb1c5;display:flex;align-items:center;gap:11px}.sparkle{font-size:13px;color:var(--mint)}.eyebrow-line{width:26px;height:1px;background:#60728c}.intro h1{font-family:var(--ko);font-weight:700;font-size:clamp(34px,5vw,53px);letter-spacing:-.065em;line-height:1.3;margin:17px 0 11px}.intro h1 span{color:var(--mint)}.intro-copy{color:#a9b6c7;font-family:var(--ko);font-size:15px;line-height:1.9;margin:0}.progress-wrap{max-width:400px;margin-top:27px}.progress-label{display:flex;justify-content:space-between;font-size:11px;color:#c6d0df;margin-bottom:8px}.progress-label span:last-child{color:#8d9db2}.progress-track{height:5px;border-radius:10px;background:#2b3850;overflow:hidden}.progress-track span{display:block;width:50%;height:100%;background:linear-gradient(90deg,var(--mint2),var(--mint));border-radius:10px;transition:width .35s ease}.mission-nav{display:flex;align-items:center;max-width:540px;margin:2px 0 28px}.mission-tab{border:1px solid #3c4d66;background:#1a263a;border-radius:14px;display:flex;align-items:center;gap:12px;text-align:left;padding:10px 14px;min-width:210px;cursor:pointer;transition:.2s}.mission-tab.active{border-color:#63c9a7;background:#203549;box-shadow:inset 0 0 0 1px #63c9a72b}.mission-tab.complete .tab-number{background:#5ac29a;color:#10271f}.mission-tab.locked{opacity:.48;cursor:not-allowed}.tab-number{width:31px;height:31px;display:grid;place-items:center;border-radius:10px;background:#293952;color:var(--mint);font:500 11px 'DM Mono',monospace}.tab-copy{display:grid;gap:1px}.tab-copy b{font-size:12px;font-family:var(--ko);font-weight:700}.tab-copy small{font-size:10px;color:#9cacc0;font-family:var(--ko)}.tab-check{margin-left:auto;color:var(--mint);font-size:13px;opacity:0}.mission-tab.complete .tab-check{opacity:1}.tab-connector{height:1px;width:35px;background:#506078}.mission-heading{display:flex;align-items:center;gap:15px;margin-bottom:17px}.mission-heading-icon{height:43px;width:43px;display:grid;place-items:center;border-radius:14px;background:#243f49;color:var(--mint);font-size:22px}.mission-kicker{font:500 10px 'DM Mono',monospace;letter-spacing:.08em;color:var(--mint)}.mission-kicker span{color:#75869c;padding:0 3px}.mission-heading h2{font-family:var(--ko);font-size:20px;letter-spacing:-.04em;margin:2px 0 0}.mission-heading p{font-family:var(--ko);font-size:12px;color:#9baabd;margin:2px 0 0}.mission-stamp{margin-left:auto;display:grid;justify-items:center;border:1px solid #40516a;border-radius:12px;width:48px;height:51px;align-content:center;color:#9baabd}.mission-stamp span{font-size:8px}.mission-stamp b{font:500 15px 'DM Mono',monospace;color:var(--mint)}.workspace{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(275px,.88fr);gap:15px;align-items:stretch}.graph-card,.control-card,.prediction-card,.field-notes,.finish-card{background:linear-gradient(150deg,#1b283d,#172236);border:1px solid #34445b;border-radius:18px;box-shadow:0 14px 40px #080d1738}.graph-card{padding:17px 19px 13px;position:relative}.card-topline{display:flex;align-items:center;justify-content:space-between}.card-topline>div{display:flex;align-items:center;gap:12px}.card-label{font:500 10px 'DM Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#a6b6c8}.graph-status{font-size:9px;color:#8c9bb0;display:flex;align-items:center;gap:5px}.graph-status i{height:5px;width:5px;border-radius:50%;background:var(--mint)}.help-button{width:22px;height:22px;border:1px solid #50617a;border-radius:50%;background:transparent;color:#b5c3d3;line-height:1;font-size:12px;cursor:pointer}.help-button:hover,.help-button:focus-visible{border-color:var(--mint);color:var(--mint)}.help-popover{position:absolute;z-index:3;right:15px;top:46px;max-width:255px;padding:11px 13px;background:#27364d;border:1px solid #52627a;border-radius:10px;color:#d6e0eb;font-family:var(--ko);font-size:11px;box-shadow:0 8px 22px #080d1766}.function-chip{display:flex;align-items:center;gap:9px;margin:15px 0 5px;font-family:'DM Mono',var(--ko);font-size:17px;font-weight:500}.function-badge{display:grid;place-items:center;width:25px;height:25px;border-radius:8px;background:#294842;color:var(--mint);font:700 13px var(--ko)}.interval-chip{margin-left:auto;padding:4px 9px;border:1px solid #43536b;border-radius:7px;font-size:10px;color:#afbdd0;background:#1d2a3e}.graph-frame{position:relative}.graph-frame svg{display:block;width:100%;height:auto;min-height:245px;overflow:visible}.grid-line{stroke:#34435a;stroke-width:1;stroke-dasharray:2 5}.axis-line{stroke:#8798ac;stroke-width:1.2}.tick-line{stroke:#7d8ea3;stroke-width:1}.axis-text{fill:#92a2b6;font:10px 'DM Mono',monospace}.grid-text{fill:#788ba2;font:9px 'DM Mono',monospace}.rect-shape{fill:#76dcb3;fill-opacity:.29;stroke:#8ce5c3;stroke-opacity:.85;stroke-width:1.2;transition:all .2s}.rect-shape:nth-child(even){fill-opacity:.19}.curve{fill:none;stroke:#ffb68e;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px #ffb68e45)}.graph-legend{display:flex;justify-content:center;gap:18px;margin:-4px 0 2px;color:#9caabe;font-size:10px}.graph-legend span{display:flex;align-items:center;gap:6px}.legend-curve{width:15px;height:3px;background:var(--coral);border-radius:4px}.legend-rect{width:10px;height:10px;border:1px solid var(--mint);background:#76dcb34a;border-radius:2px}.graph-footer{border-top:1px solid #2e3d53;margin-top:10px;padding-top:10px;display:flex;gap:8px;align-items:center;color:#9cacc0;font-family:var(--ko);font-size:10px}.tiny-orbit{font-size:14px;color:var(--lav)}.control-card{padding:20px 18px;display:flex;flex-direction:column}.control-heading{display:flex;gap:10px;align-items:center}.control-icon{height:32px;width:32px;border-radius:10px;background:#2b354c;color:var(--lav);font-size:22px;display:grid;place-items:center}.control-heading h3{font-family:var(--ko);margin:1px 0 0;font-size:14px;letter-spacing:-.02em}.control-group{margin-top:25px}.control-label-row{display:flex;align-items:center;justify-content:space-between;font-family:var(--ko);font-size:11px;color:#d2dbe7}.control-label-row output{border-radius:7px;background:#294842;color:var(--mint);padding:3px 8px;font:500 10px 'DM Mono',monospace}.control-group input[type=range]{width:100%;margin:17px 0 0;appearance:none;height:5px;border-radius:6px;background:linear-gradient(90deg,#70d5aa 20%,#3b4a60 20%);outline:none;cursor:pointer}.control-group input[type=range]::-webkit-slider-thumb{appearance:none;width:17px;height:17px;border-radius:50%;background:#102b26;border:4px solid var(--mint);box-shadow:0 0 0 3px #8ce5c326}.control-group input[type=range]::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:#102b26;border:4px solid var(--mint);box-shadow:0 0 0 3px #8ce5c326}.control-group input[type=range]:focus-visible{filter:drop-shadow(0 0 4px var(--mint))}.range-ends{display:flex;justify-content:space-between;color:#75869b;font:9px 'DM Mono',monospace;margin-top:4px}.method-group{margin-top:25px}.control-label{font-family:var(--ko);font-size:11px;color:#d2dbe7}.segmented{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:9px;padding:4px;background:#121d30;border:1px solid #2f3e54;border-radius:10px}.method-button{height:37px;border:0;border-radius:7px;background:transparent;color:#9aa9bb;font-family:var(--ko);font-size:10px;cursor:pointer;transition:.15s}.method-button.selected{background:#314358;color:#f4f8fc;box-shadow:0 2px 8px #08101c66}.method-button:focus-visible,.primary-button:focus-visible,.secondary-button:focus-visible,.mission-tab:focus-visible{outline:2px solid var(--mint);outline-offset:2px}.method-dot{display:inline-block;width:6px;height:6px;border:1.5px solid currentColor;border-radius:50%;vertical-align:1px;margin-right:4px}.method-button.selected .method-dot{background:var(--mint);border-color:var(--mint)}.sum-readout{display:flex;align-items:center;justify-content:space-between;margin-top:23px;padding:13px 12px;border:1px solid #3c4d62;border-radius:11px;background:#202e43}.readout-label,.readout-sub{display:block;font-family:var(--ko)}.readout-label{font-size:10px;color:#d0d9e4}.readout-sub{font-size:9px;color:#899bb0;margin-top:3px}.sum-readout strong{font:600 22px 'DM Mono',monospace;color:var(--mint);letter-spacing:-.04em}.micro-note{display:flex;gap:7px;margin-top:auto;padding-top:13px;font-family:var(--ko);font-size:9px;line-height:1.6;color:#a4b2c3}.micro-note span:first-child{color:var(--lav);font-size:13px}.prediction-card{margin-top:15px;padding:19px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center}.prediction-intro{display:flex;gap:12px;align-items:flex-start}.prediction-mark{height:33px;width:33px;flex:0 0 33px;display:grid;place-items:center;border-radius:11px;background:#493b50;color:#ffc1a1;font:700 17px var(--ko)}.prediction-intro h3{font-family:var(--ko);font-size:14px;margin:3px 0;letter-spacing:-.03em}.prediction-intro p{font-family:var(--ko);font-size:10px;color:#9eacbd;margin:0}.guess-form{display:flex;gap:8px;align-items:center}.guess-input-wrap{position:relative}.guess-input-wrap input{width:127px;height:40px;padding:0 37px 0 12px;background:#111c2e;border:1px solid #42536a;border-radius:9px;color:var(--text);font:500 13px 'DM Mono',monospace;outline:0}.guess-input-wrap input:focus{border-color:var(--mint);box-shadow:0 0 0 3px #8ce5c31e}.guess-input-wrap input::placeholder{color:#697c93}.guess-input-wrap>span{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-family:var(--ko);font-size:9px;color:#8798ac}.primary-button,.secondary-button{height:40px;border:0;border-radius:9px;padding:0 14px;display:flex;align-items:center;gap:14px;justify-content:center;cursor:pointer;font-family:var(--ko);font-size:11px;font-weight:700;transition:transform .15s,filter .15s}.primary-button{background:var(--mint);color:#10271f;box-shadow:0 5px 14px #56c9a126}.primary-button:hover,.secondary-button:hover{transform:translateY(-1px);filter:brightness(1.06)}.primary-button span:last-child{font-size:15px}.input-note{grid-column:2;text-align:left;color:#8595aa;font-family:var(--ko);font-size:9px;margin:-10px 0 0}.input-note.error{color:#ffad9e}.reveal-result{grid-column:1/-1;display:flex;align-items:center;gap:11px;padding:14px 13px;border:1px solid #4e866f;border-radius:12px;background:#213b3b;animation:rise .3s ease}.result-icon{height:30px;width:30px;display:grid;place-items:center;border-radius:10px;background:#31594d;color:var(--mint);flex:0 0 30px}.result-copy{min-width:0}.result-copy h4{font-family:var(--ko);font-size:12px;margin:2px 0}.result-copy p{font-family:var(--ko);font-size:10px;color:#b8c8cb;margin:0}.answer-pill{margin-left:auto;display:grid;gap:1px;text-align:right;white-space:nowrap}.answer-pill span{font-family:var(--ko);font-size:9px;color:#9fb4b2}.answer-pill b{font:600 18px 'DM Mono',monospace;color:var(--mint)}.next-row{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding-top:1px;color:#a7b5c6;font-family:var(--ko);font-size:10px}.secondary-button{background:#344b5a;color:#dff9ee;border:1px solid #527d73}.field-notes{margin-top:15px;display:flex;align-items:center;gap:11px;padding:13px 17px;background:#20243a;border-color:#3c3f5a}.field-icon{height:31px;width:31px;display:grid;place-items:center;border-radius:9px;background:#3a3451;color:var(--lav);font-size:17px}.field-copy{flex:1}.field-copy p{font-family:var(--ko);color:#b7bfd0;font-size:10px;margin:3px 0 0}.note-tag{border:1px solid #4b4663;border-radius:7px;padding:4px 8px;color:#b9addf;font-family:var(--ko);font-size:9px;white-space:nowrap}.finish-card{margin-top:15px;text-align:center;padding:30px 20px;background:radial-gradient(ellipse at 50% 0%,#28463e,#18283a 60%);border-color:#436b5c}.finish-star{height:45px;width:45px;margin:0 auto 10px;display:grid;place-items:center;border-radius:14px;background:#315448;color:var(--mint);font-size:22px}.finish-card h2{font-family:var(--ko);font-size:20px;margin:4px 0 8px}.finish-card p{font-family:var(--ko);font-size:11px;color:#b3c1c9;line-height:1.9;margin:0 0 16px}.finish-card .secondary-button{margin:auto}footer{display:flex;justify-content:space-between;padding:24px 2px 34px;margin-top:11px;color:#75869a;font-family:var(--ko);font-size:9px}footer span:first-child{font-weight:700;color:#9caabd}footer i{font-style:normal;color:var(--mint)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}[hidden]{display:none!important}@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:790px){.app-shell{width:min(680px,calc(100% - 32px))}.intro{padding-top:42px}.workspace{grid-template-columns:1fr}.control-card{display:grid;grid-template-columns:1fr 1fr;column-gap:20px;row-gap:0}.control-heading{grid-column:1/-1}.control-group{margin-top:20px}.method-group{margin-top:20px}.sum-readout{grid-column:1/-1;margin-top:17px}.micro-note{grid-column:1/-1;margin-top:0}.graph-frame svg{min-height:0}.prediction-card{grid-template-columns:1fr}.guess-form{grid-row:2}.input-note{grid-column:1;grid-row:3;margin:-9px 0 0 1px}.reveal-result,.next-row{grid-column:1}.prediction-intro p{max-width:440px}}
+@media(max-width:520px){.app-shell{width:calc(100% - 24px)}.topbar{height:60px}.class-tag{font-size:10px}.intro{padding:34px 2px 24px}.intro h1{font-size:35px}.intro-copy{font-size:12px}.desktop-only{display:none}.eyebrow{font-size:8px;gap:8px}.progress-wrap{margin-top:21px}.mission-tab{min-width:0;flex:1;padding:8px 9px;gap:8px}.tab-connector{width:18px}.tab-copy b{font-size:10px}.tab-copy small{font-size:9px}.mission-heading{gap:10px}.mission-heading h2{font-size:17px}.mission-heading p{font-size:10px}.mission-heading-icon{width:38px;height:38px}.mission-stamp{width:39px;height:44px}.graph-card{padding:14px 12px 11px}.function-chip{font-size:15px}.graph-frame svg{min-height:0}.graph-legend{font-size:9px}.control-card{padding:16px 13px;grid-template-columns:1fr}.control-heading{grid-column:1}.control-group{margin-top:17px}.method-group{margin-top:19px}.sum-readout{grid-column:1;margin-top:17px}.micro-note{grid-column:1}.prediction-card{padding:15px 12px}.prediction-intro h3{font-size:13px}.prediction-intro p{font-size:9px}.guess-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px}.guess-input-wrap input{width:100%}.primary-button{padding:0 11px;gap:9px}.reveal-result{flex-wrap:wrap;padding:12px 10px;gap:8px}.result-copy{flex:1}.answer-pill{padding-left:38px;width:100%;display:flex;align-items:center;justify-content:space-between;text-align:left;border-top:1px solid #4e7166;padding-top:7px}.next-row{align-items:flex-start;gap:10px}.secondary-button{padding:0 10px;white-space:nowrap;font-size:10px}.field-notes{align-items:flex-start;padding:12px 11px;gap:8px}.field-copy p{font-size:9px}.note-tag{display:none}footer{font-size:8px}.mission-nav{margin-bottom:23px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+.mission-nav{max-width:740px}.mission-tab{min-width:0;flex:1}.free-controls{width:100%;padding-top:16px;border-top:1px solid #34445b}.setting-label{display:block;margin:10px 0 5px;color:#cbd5e1;font-family:var(--ko);font-size:10px}.setting-input{width:100%;min-height:35px;padding:6px 9px;border:1px solid #43546c;border-radius:8px;background:#111c2e;color:var(--text);font:11px 'DM Mono',var(--ko);outline:0}.setting-input:focus{border-color:var(--mint);box-shadow:0 0 0 3px #8ce5c31e}.coefficient-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.coefficient-grid label,.interval-settings label{display:grid;gap:4px;color:#aebdce;font-family:var(--ko);font-size:9px}.interval-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.setting-help{color:#8fa0b4;font-family:var(--ko);font-size:9px;line-height:1.5;margin:9px 0}.apply-settings{width:100%;min-height:34px;border:1px solid #527d73;border-radius:8px;background:#29463f;color:#dff9ee;font-family:var(--ko);font-size:10px;font-weight:700;cursor:pointer}.apply-settings:hover{filter:brightness(1.12)}.rect-shape.below-axis{fill:#ffb68e;fill-opacity:.25;stroke:#ffb68e;stroke-opacity:.8}.rect-shape.below-axis:nth-child(even){fill-opacity:.16}
+@media(max-width:790px){.mission-nav{max-width:100%}.free-controls{grid-column:1/-1}}
+@media(max-width:520px){.free-controls{grid-column:1}.coefficient-grid,.interval-settings{gap:6px}.mission-nav .tab-connector{width:9px}.mission-tab{padding:8px 6px;gap:6px}.tab-copy b{font-size:9px}.tab-copy small{font-size:8px}.tab-number{width:26px;height:26px}}
+
+</style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="넓이 탐험대 홈">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span>넓이 탐험대</span>
+        </a>
+        <div class="class-tag"><span class="live-dot"></span> 전문수학 · 고2 탐구 미션</div>
+      </header>
+
+      <main id="top">
+        <section class="intro">
+          <div class="eyebrow"><span class="sparkle">✦</span> AREA EXPLORERS <span class="eyebrow-line"></span> MISSION 01–03</div>
+          <h1>곡선 아래 넓이를<br><span>직사각형으로</span> 탐험해요</h1>
+          <p class="intro-copy">잘게 나눈 직사각형의 넓이를 더하면 곡선 아래 넓이에 얼마나 가까워질까요?<br class="desktop-only"> 먼저 움직여 보고, 나만의 예상값을 적어 보세요.</p>
+          <div class="progress-wrap" aria-label="탐구 미션 진행 상황">
+            <div class="progress-label"><span id="progressText">미션 1 / 3</span><span id="progressHint">탐험을 시작해요</span></div>
+            <div class="progress-track"><span id="progressFill"></span></div>
+          </div>
+        </section>
+
+        <nav class="mission-nav" aria-label="탐구 미션">
+          <button class="mission-tab active" id="tabLinear" type="button" aria-current="step">
+            <span class="tab-number">01</span><span class="tab-copy"><b>직선 발판</b><small>일차함수</small></span><span class="tab-check" aria-hidden="true">✓</span>
+          </button>
+          <span class="tab-connector" aria-hidden="true"></span>
+          <button class="mission-tab locked" id="tabQuadratic" type="button" aria-disabled="true" title="첫 미션을 탐험하면 열려요">
+            <span class="tab-number">02</span><span class="tab-copy"><b>포물선 발판</b><small>이차함수</small></span><span class="tab-check" aria-hidden="true">✓</span>
+          </button>
+          <span class="tab-connector" aria-hidden="true"></span>
+          <button class="mission-tab locked" id="tabExplore" type="button" aria-disabled="true" title="두 번째 미션을 마치면 열려요">
+            <span class="tab-number">03</span><span class="tab-copy"><b>자유 탐구</b><small>다항함수</small></span><span class="tab-check" aria-hidden="true">✓</span>
+          </button>
+        </nav>
+
+        <section class="mission-heading" aria-live="polite">
+          <div class="mission-heading-icon" id="missionIcon" aria-hidden="true">↗</div>
+          <div><div class="mission-kicker" id="missionKicker">MISSION 01 <span>·</span> 직선 발판</div><h2 id="missionTitle">직선 아래를 채워 보자!</h2><p id="missionPrompt">일차함수의 그래프와 직사각형 발판을 함께 살펴봐요.</p></div>
+          <div class="mission-stamp"><span>탐험</span><b id="missionStamp">01</b></div>
+        </section>
+
+        <section class="workspace" aria-label="구분구적법 탐구 도구">
+          <div class="graph-card">
+            <div class="card-topline"><div><span class="card-label">넓이 관찰 창</span><span class="graph-status"><i></i> 실시간 반영</span></div><button class="help-button" id="helpButton" type="button" aria-expanded="false" aria-controls="helpPopover">?</button></div>
+            <div class="help-popover" id="helpPopover" hidden>왼쪽 끝점 방식은 각 구간의 왼쪽 높이로, 오른쪽 끝점 방식은 오른쪽 높이로 직사각형을 만들어요.</div>
+            <div class="function-chip"><span class="function-badge" id="functionBadge">f</span><span id="functionLabel">y = x</span><span class="interval-chip" id="intervalLabel">0 ≤ x ≤ 1</span></div>
+            <div class="graph-frame">
+              <svg id="graph" viewBox="0 0 640 352" role="img" aria-labelledby="graphTitle graphDescription">
+                <title id="graphTitle">함수 그래프와 구분구적법 직사각형</title>
+                <desc id="graphDescription">분할한 직사각형 넓이의 합을 그래프에서 관찰합니다.</desc>
+                <g id="gridLayer"></g><g id="rectLayer"></g><path id="curvePath" class="curve" d=""></path><g id="axisLayer"></g><g id="labelLayer"></g>
+              </svg>
+              <div class="graph-legend"><span><i class="legend-curve"></i>함수 그래프</span><span><i class="legend-rect"></i>직사각형 발판</span></div>
+            </div>
+            <div class="graph-footer"><span class="tiny-orbit" aria-hidden="true">✳</span><span id="graphHint">발판이 곡선 아래를 얼마나 채우는지 관찰해 보세요.</span></div>
+          </div>
+
+          <aside class="control-card">
+            <div class="control-heading"><span class="control-icon">⌁</span><div><span class="card-label">탐험 도구</span><h3>발판을 조절해요</h3></div></div>
+            <div class="control-group">
+              <div class="control-label-row"><label for="partitionRange">발판(분할) 개수</label><output id="partitionValue" for="partitionRange">4개</output></div>
+              <input id="partitionRange" type="range" min="1" max="50" value="4" aria-label="직사각형 발판 개수">
+              <div class="range-ends"><span>1개</span><span id="rangeMaximum">50개</span></div>
+            </div>
+            <div class="control-group method-group">
+              <span class="control-label">높이를 정하는 위치</span>
+              <div class="segmented" role="group" aria-label="직사각형 높이를 정하는 위치">
+                <button type="button" class="method-button selected" data-method="left" aria-pressed="true"><span class="method-dot"></span>왼쪽 끝점</button>
+                <button type="button" class="method-button" data-method="right" aria-pressed="false"><span class="method-dot"></span>오른쪽 끝점</button>
+              </div>
+            </div>
+            <div class="control-group free-controls" id="freeControls" hidden>
+              <span class="control-label">다항함수 자유 탐구</span>
+              <label class="setting-label" for="degreeSelect">함수의 차수</label>
+              <select id="degreeSelect" class="setting-input"><option value="1">1차</option><option value="2" selected>2차</option><option value="3">3차</option><option value="4">4차</option></select>
+              <div class="coefficient-grid" id="coefficientInputs"></div>
+              <div class="interval-settings">
+                <label><span>구간 시작 a</span><input id="intervalStart" class="setting-input" type="number" min="-4" max="4" step="0.5" value="-1"></label>
+                <label><span>구간 끝 b</span><input id="intervalEnd" class="setting-input" type="number" min="-4" max="4" step="0.5" value="1"></label>
+              </div>
+              <p class="setting-help" id="settingHelp">기본 함수 p(x)=0.5x²+0.5x+1, 구간 [-1, 1]</p>
+              <button class="apply-settings" id="applySettings" type="button">함수와 구간 적용</button>
+            </div>
+            <div class="sum-readout"><div><span class="readout-label" id="readoutLabel">현재 발판 넓이의 합</span><span class="readout-sub" id="readoutSub">계산된 근삿값</span></div><strong id="sumValue">0.375</strong></div>
+            <div class="micro-note"><span>↳</span><span>개수를 늘려 보며 근삿값이 어떻게 달라지는지 비교해요.</span></div>
+          </aside>
+        </section>
+
+        <section class="prediction-card" id="predictionCard">
+          <div class="prediction-intro"><div class="prediction-mark" aria-hidden="true">?</div><div><span class="card-label">먼저 생각해 보기</span><h3>실제 넓이는 얼마쯤일까요?</h3><p>발판 수와 위치를 바꿔 본 뒤, 곡선 아래 넓이를 예상해 보세요.</p></div></div>
+          <form id="guessForm" class="guess-form">
+            <label for="guessInput" class="sr-only">예상하는 실제 넓이</label>
+            <div class="guess-input-wrap"><input id="guessInput" type="number" inputmode="decimal" min="0" max="1" step="any" placeholder="예: 0.48" autocomplete="off" required><span>넓이</span></div>
+            <button class="primary-button" type="submit"><span>예상 확인하기</span><span aria-hidden="true">→</span></button>
+          </form>
+          <p class="input-note" id="inputNote">0과 1 사이의 수로 적어 보세요.</p>
+          <div class="reveal-result" id="revealResult" hidden aria-live="polite">
+            <div class="result-icon" id="resultIcon" aria-hidden="true">✦</div><div class="result-copy"><span class="card-label">탐험 결과</span><h4 id="resultTitle">정확한 넓이를 확인했어요!</h4><p id="resultText"></p></div><div class="answer-pill"><span>실제 넓이</span><b id="exactValue"></b></div>
+          </div>
+          <div class="next-row" id="nextRow" hidden><span id="nextMessage">첫 발판 탐험을 마쳤어요.</span><button class="secondary-button" id="nextButton" type="button">다음 미션으로 <span aria-hidden="true">→</span></button></div>
+        </section>
+
+        <section class="field-notes" id="fieldNotes">
+          <div class="field-icon" aria-hidden="true">✎</div><div class="field-copy"><span class="card-label">탐험 노트</span><p id="fieldNoteText">일차함수 아래의 넓이를 발판으로 채우며, 분할 개수와 끝점 위치가 합에 어떤 변화를 주는지 살펴봐요.</p></div><span class="note-tag">관찰하며 기록</span>
+        </section>
+
+        <section class="finish-card" id="finishCard" hidden>
+          <div class="finish-star">✦</div><span class="card-label">자유 탐구</span><h2>함수와 구간을 바꿔 더 탐험해요!</h2><p>차수와 계수, 구간을 바꾸고 발판 개수와 끝점 방식도 조절해 보세요.<br>조건이 달라질 때 넓이의 합이 어떻게 변하는지 관찰해 보세요.</p><button class="secondary-button" id="replayButton" type="button">첫 미션으로 돌아가기 <span aria-hidden="true">↺</span></button>
+        </section>
+      </main>
+      <footer><span>넓이 탐험대</span><span>직사각형으로 넓이를 탐구해요 <i>✦</i></span></footer>
+    </div>
+    <script>
+(() => {
+  const state = {
+    mission: 0,
+    method: 'left',
+    count: 4,
+    savedCounts: [4, 50, 12],
+    unlocked: false,
+    freeUnlocked: false,
+    completed: [false, false],
+    degree: 2,
+    coefficients: [1, 0.5, 0.5, 0, 0],
+    a: -1,
+    b: 1
+  };
+  const $ = (id) => document.getElementById(id);
+  const NS = 'http://www.w3.org/2000/svg';
+  const range = $('partitionRange');
+  const W = 640, H = 352, left = 66, right = 20, top = 20, bottom = 47;
+  const plotW = W - left - right, plotH = H - top - bottom;
+  let view = { xmin: 0, xmax: 1, ymin: 0, ymax: 1 };
+
+  function domain() {
+    return state.mission === 2 ? { a: state.a, b: state.b } : { a: 0, b: 1 };
+  }
+
+  function fn(x) {
+    if (state.mission === 0) return x;
+    if (state.mission === 1) return x * x;
+    return state.coefficients.slice(0, state.degree + 1).reduce((sum, coefficient, power) => sum + coefficient * (x ** power), 0);
+  }
+
+  function px(x) { return left + ((x - view.xmin) / (view.xmax - view.xmin)) * plotW; }
+  function py(y) { return top + ((view.ymax - y) / (view.ymax - view.ymin)) * plotH; }
+  function formatNumber(value, places = 2) {
+    const clean = Math.abs(value) < 1e-9 ? 0 : value;
+    return clean.toFixed(places).replace(/0+$/, '').replace(/\.$/, '');
+  }
+
+  function formatPolynomial() {
+    const superscripts = ['⁰', '¹', '²', '³', '⁴'];
+    const terms = [];
+    for (let power = state.degree; power >= 0; power--) {
+      const coefficient = state.coefficients[power] || 0;
+      if (Math.abs(coefficient) < 1e-9) continue;
+      const absolute = Math.abs(coefficient);
+      const coefficientText = power > 0 && Math.abs(absolute - 1) < 1e-9 ? '' : formatNumber(absolute);
+      const variable = power === 0 ? '' : power === 1 ? 'x' : `x${superscripts[power]}`;
+      const term = `${coefficientText}${variable}` || formatNumber(absolute);
+      terms.push(`${terms.length === 0 ? (coefficient < 0 ? '−' : '') : (coefficient < 0 ? ' − ' : ' + ')}${term}`);
+    }
+    return `p(x) = ${terms.length ? terms.join('') : '0'}`;
+  }
+
+  function calculateView() {
+    const { a, b } = domain();
+    if (state.mission < 2) {
+      view = { xmin: 0, xmax: 1, ymin: 0, ymax: 1 };
+      return;
+    }
+    let low = 0, high = 0;
+    for (let i = 0; i <= 200; i++) {
+      const y = fn(a + (b - a) * i / 200);
+      low = Math.min(low, y); high = Math.max(high, y);
+    }
+    if (Math.abs(high - low) < 1e-6) { low -= 0.5; high += 0.5; }
+    else { const pad = (high - low) * 0.12; low -= pad; high += pad; }
+    view = { xmin: a, xmax: b, ymin: low, ymax: high };
+  }
+
+  function pathForCurve() {
+    const { a, b } = domain();
+    let d = '';
+    for (let i = 0; i <= 120; i++) {
+      const x = a + (b - a) * i / 120;
+      d += `${i === 0 ? 'M' : 'L'} ${px(x).toFixed(2)} ${py(fn(x)).toFixed(2)} `;
+    }
+    return d;
+  }
+
+  function svgElement(name, attrs = {}) {
+    const element = document.createElementNS(NS, name);
+    Object.entries(attrs).forEach(([key, value]) => element.setAttribute(key, value));
+    return element;
+  }
+
+  function drawGrid() {
+    const grid = $('gridLayer'), axes = $('axisLayer'), labels = $('labelLayer');
+    grid.replaceChildren(); axes.replaceChildren(); labels.replaceChildren();
+    for (let i = 0; i <= 4; i++) {
+      const y = view.ymax - (view.ymax - view.ymin) * i / 4;
+      const yy = py(y);
+      grid.append(svgElement('line', { x1: left, x2: W - right, y1: yy, y2: yy, class: 'grid-line' }));
+      const label = svgElement('text', { x: left - 12, y: yy + 3, 'text-anchor': 'end', class: 'grid-text' });
+      label.textContent = formatNumber(y); labels.append(label);
+    }
+    for (let i = 0; i <= 4; i++) {
+      const x = view.xmin + (view.xmax - view.xmin) * i / 4;
+      const xx = px(x);
+      grid.append(svgElement('line', { x1: xx, x2: xx, y1: top, y2: H - bottom, class: 'grid-line' }));
+      axes.append(svgElement('line', { x1: xx, x2: xx, y1: H - bottom, y2: H - bottom + 5, class: 'tick-line' }));
+      const label = svgElement('text', { x: xx, y: H - bottom + 18, 'text-anchor': 'middle', class: 'axis-text' });
+      label.textContent = formatNumber(x); labels.append(label);
+    }
+    const yAxisY = Math.min(H - bottom, Math.max(top, py(0)));
+    const xAxisX = Math.min(W - right, Math.max(left, px(0)));
+    axes.append(svgElement('line', { x1: left, x2: W - right, y1: yAxisY, y2: yAxisY, class: 'axis-line' }));
+    axes.append(svgElement('line', { x1: xAxisX, x2: xAxisX, y1: top, y2: H - bottom, class: 'axis-line' }));
+    const xLabel = svgElement('text', { x: W - right, y: H - 8, 'text-anchor': 'end', class: 'axis-text' });
+    xLabel.textContent = 'x'; labels.append(xLabel);
+  }
+
+  function sumValue() {
+    const { a, b } = domain(), n = state.count, dx = (b - a) / n;
+    let sum = 0;
+    for (let i = 0; i < n; i++) {
+      const x = a + (i + (state.method === 'right' ? 1 : 0)) * dx;
+      sum += fn(x) * dx;
+    }
+    return sum;
+  }
+
+  function drawRectangles() {
+    const layer = $('rectLayer'); layer.replaceChildren();
+    const { a, b } = domain(), dx = (b - a) / state.count, baseline = py(0);
+    for (let i = 0; i < state.count; i++) {
+      const x0 = a + i * dx;
+      const sample = state.method === 'left' ? x0 : x0 + dx;
+      const heightValue = fn(sample), sampleY = py(heightValue);
+      const rect = svgElement('rect', {
+        x: px(x0), y: Math.min(sampleY, baseline),
+        width: px(x0 + dx) - px(x0), height: Math.abs(baseline - sampleY),
+        class: `rect-shape${heightValue < 0 ? ' below-axis' : ''}`
+      });
+      const title = svgElement('title');
+      title.textContent = `${i + 1}번째 직사각형, 폭 ${dx.toFixed(3)}, 높이 ${heightValue.toFixed(3)}`;
+      rect.append(title); layer.append(rect);
+    }
+  }
+
+  function exact() { return state.mission === 0 ? 0.5 : 1 / 3; }
+
+  function clearAnswer() {
+    $('guessInput').value = '';
+    $('revealResult').hidden = true;
+    $('nextRow').hidden = true;
+    $('inputNote').classList.remove('error');
+    $('inputNote').textContent = '0과 1 사이의 수로 적어 보세요.';
+  }
+
+  function updateNavigation() {
+    const tabs = [$('tabLinear'), $('tabQuadratic'), $('tabExplore')];
+    const locked = [false, !state.unlocked, !state.freeUnlocked];
+    tabs.forEach((tab, index) => {
+      tab.classList.toggle('active', state.mission === index);
+      tab.classList.toggle('locked', locked[index]);
+      tab.classList.toggle('complete', index < 2 && state.completed[index]);
+      tab.setAttribute('aria-disabled', String(locked[index]));
+      tab.setAttribute('aria-current', state.mission === index ? 'step' : 'false');
+    });
+    $('tabQuadratic').title = state.unlocked ? '포물선 미션 보기' : '첫 미션을 마치면 열려요';
+    $('tabExplore').title = state.freeUnlocked ? '자유 탐구 열기' : '포물선 미션을 마치면 열려요';
+    const progress = state.mission === 0 ? (state.completed[0] ? 50 : 20)
+      : state.mission === 1 ? (state.completed[1] ? 82 : 60) : 100;
+    $('progressText').textContent = `미션 ${state.mission + 1} / 3`;
+    $('progressHint').textContent = state.mission === 2 ? '자유롭게 탐험해요' : state.completed[1] ? '자유 탐구가 열렸어요' : state.completed[0] ? '다음 미션이 열렸어요' : '탐험을 시작해요';
+    $('progressFill').style.width = `${progress}%`;
+  }
+
+  function renderCoefficientInputs() {
+    const degree = Number($('degreeSelect').value), container = $('coefficientInputs');
+    container.replaceChildren();
+    for (let power = degree; power >= 0; power--) {
+      const label = document.createElement('label');
+      label.textContent = power === 0 ? '상수항' : `x${power === 1 ? '' : `^${power}`} 계수`;
+      const input = document.createElement('input');
+      input.type = 'number'; input.min = '-3'; input.max = '3'; input.step = '0.5';
+      input.value = state.coefficients[power] ?? 0; input.dataset.power = String(power); input.className = 'setting-input coefficient-input';
+      input.setAttribute('aria-label', label.textContent);
+      label.append(input); container.append(label);
+    }
+  }
+
+  function renderControls() {
+    $('partitionValue').textContent = `${state.count}개`;
+    $('sumValue').textContent = sumValue().toFixed(3);
+    const pct = ((state.count - 1) / 49) * 100;
+    range.value = String(state.count);
+    range.style.background = `linear-gradient(90deg,#70d5aa ${pct}%,#3b4a60 ${pct}%)`;
+    $('rangeMaximum').textContent = '50개';
+    document.querySelectorAll('.method-button').forEach(button => {
+      const selected = button.dataset.method === state.method;
+      button.classList.toggle('selected', selected); button.setAttribute('aria-pressed', String(selected));
+    });
+    $('freeControls').hidden = state.mission !== 2;
+    $('predictionCard').hidden = state.mission === 2;
+    $('finishCard').hidden = state.mission !== 2;
+    $('readoutLabel').textContent = state.mission === 2 ? '현재 직사각형 넓이 합' : '현재 발판 넓이의 합';
+    $('readoutSub').textContent = state.mission === 2 ? 'x축 아래 값은 음수로 합산' : '계산된 근삿값';
+  }
+
+  function renderMission() {
+    const mission = state.mission;
+    const labels = [
+      { badge: 'f', title: '직선 아래를 채워 보자!', prompt: '일차함수의 그래프와 직사각형 발판을 함께 살펴봐요.', icon: '↗', kicker: 'MISSION 01 · 직선 발판' },
+      { badge: 'g', title: '포물선 발판을 50개까지 늘려 보자!', prompt: '발판을 잘게 나누면 넓이의 합이 어떻게 달라지는지 살펴봐요.', icon: '⌒', kicker: 'MISSION 02 · 포물선 발판' },
+      { badge: 'p', title: '나만의 다항함수를 탐험해요!', prompt: '차수와 계수, 구간을 바꾸며 넓이의 합을 자유롭게 관찰해요.', icon: '✳', kicker: 'MISSION 03 · 자유 탐구' }
+    ][mission];
+    const formula = mission === 0 ? 'y = x' : mission === 1 ? 'y = x²' : formatPolynomial();
+    const { a, b } = domain();
+    $('functionBadge').textContent = labels.badge;
+    $('functionLabel').textContent = formula;
+    $('intervalLabel').textContent = `${formatNumber(a)} ≤ x ≤ ${formatNumber(b)}`;
+    $('missionKicker').textContent = labels.kicker;
+    $('missionTitle').textContent = labels.title;
+    $('missionPrompt').textContent = labels.prompt;
+    $('missionIcon').textContent = labels.icon;
+    $('missionStamp').textContent = `0${mission + 1}`;
+    $('fieldNoteText').textContent = mission === 0
+      ? '일차함수 아래의 넓이를 발판으로 채우며, 분할 개수와 끝점 위치가 합에 어떤 변화를 주는지 살펴봐요.'
+      : mission === 1
+        ? '이차함수 그래프에서 발판을 50개 가까이 늘려 보세요. 4개일 때와 비교해 넓이의 합이 얼마나 달라지는지 관찰해요.'
+        : '차수, 계수, 구간을 바꾸고 발판 개수와 끝점 방식을 조절해 보세요. 그래프가 x축 아래에 있으면 그 부분은 음수로 합산됩니다.';
+    $('graphHint').textContent = mission === 2
+      ? '함수의 모양과 구간을 바꾸며 발판 넓이의 합이 어떻게 달라지는지 살펴보세요.'
+      : state.method === 'left'
+        ? '각 발판의 높이를 왼쪽 끝점에서 정했어요. 곡선과 발판 사이를 살펴보세요.'
+        : '각 발판의 높이를 오른쪽 끝점에서 정했어요. 곡선과 발판 사이를 살펴보세요.';
+    calculateView();
+    $('curvePath').setAttribute('d', pathForCurve());
+    $('graphDescription').textContent = `${formula} 그래프에서 ${state.count}개의 ${state.method === 'left' ? '왼쪽 끝점' : '오른쪽 끝점'} 직사각형을 관찰합니다. 구간 ${formatNumber(a)}부터 ${formatNumber(b)}까지입니다.`;
+    $('graphTitle').textContent = `${formula} 구분구적법 그래프`;
+    drawGrid(); drawRectangles(); clearAnswer(); renderControls(); updateNavigation();
+  }
+
+  function switchMission(next) {
+    if (next === 1 && !state.unlocked) return;
+    if (next === 2 && !state.freeUnlocked) return;
+    state.savedCounts[state.mission] = state.count;
+    state.mission = next;
+    state.count = state.savedCounts[next];
+    renderMission();
+  }
+
+  $('helpButton').addEventListener('click', () => {
+    const pop = $('helpPopover'), open = pop.hidden;
+    pop.hidden = !open; $('helpButton').setAttribute('aria-expanded', String(open));
+  });
+
+  range.addEventListener('input', () => {
+    state.count = Number(range.value); state.savedCounts[state.mission] = state.count;
+    renderControls(); drawRectangles();
+    $('graphDescription').textContent = `${state.count}개의 직사각형 발판으로 곡선 아래 넓이를 근사합니다.`;
+  });
+
+  document.querySelectorAll('.method-button').forEach(button => button.addEventListener('click', () => {
+    state.method = button.dataset.method; renderControls(); drawRectangles();
+    $('graphDescription').textContent = `${state.count}개의 ${state.method === 'left' ? '왼쪽 끝점' : '오른쪽 끝점'} 직사각형 발판으로 곡선 아래 넓이를 근사합니다.`;
+  }));
+
+  $('degreeSelect').addEventListener('change', renderCoefficientInputs);
+  $('applySettings').addEventListener('click', () => {
+    const degree = Number($('degreeSelect').value);
+    const a = Number($('intervalStart').value), b = Number($('intervalEnd').value);
+    const coeffs = [0, 0, 0, 0, 0];
+    let valid = Number.isFinite(a) && Number.isFinite(b) && a < b;
+    document.querySelectorAll('.coefficient-input').forEach(input => {
+      const value = Number(input.value), power = Number(input.dataset.power);
+      if (!Number.isFinite(value) || value < -3 || value > 3) valid = false;
+      coeffs[power] = value;
+    });
+    if (!valid) {
+      $('settingHelp').textContent = '구간은 시작값보다 끝값이 커야 하고, 계수는 −3부터 3 사이여야 해요.';
+      $('settingHelp').classList.add('error'); return;
+    }
+    state.degree = degree; state.coefficients = coeffs; state.a = a; state.b = b;
+    $('settingHelp').classList.remove('error');
+    renderMission();
+    $('settingHelp').textContent = `${formatPolynomial()}, 구간 [${formatNumber(a)}, ${formatNumber(b)}]`;
+  });
+
+  $('guessForm').addEventListener('submit', event => {
+    event.preventDefault();
+    const input = $('guessInput'), guess = Number(input.value);
+    if (!input.value || !Number.isFinite(guess) || guess < 0 || guess > 1) {
+      $('inputNote').textContent = '0 이상 1 이하의 수를 입력해 주세요.';
+      $('inputNote').classList.add('error'); input.focus(); return;
+    }
+    const target = exact(), precise = Math.abs(guess - target) < 0.015;
+    $('resultIcon').textContent = precise ? '✦' : '↗';
+    $('resultTitle').textContent = precise ? '예상한 넓이가 아주 가까워요!' : '예상과 실제 넓이를 비교해 봐요.';
+    const relation = guess < target ? '실제보다 작게' : guess > target ? '실제보다 크게' : '정확하게';
+    $('resultText').textContent = `내 예상 ${guess.toFixed(3)}은 실제 넓이를 ${relation} 예상했어요. 현재 발판 넓이의 합과도 비교해 보세요.`;
+    $('exactValue').textContent = state.mission === 0 ? '0.500 (1/2)' : '약 0.333 (1/3)';
+    $('revealResult').hidden = false; $('nextRow').hidden = false;
+    $('inputNote').classList.remove('error'); $('inputNote').textContent = '예상값을 기록했어요.';
+    state.completed[state.mission] = true;
+    if (state.mission === 0) state.unlocked = true;
+    if (state.mission === 1) state.freeUnlocked = true;
+    updateNavigation();
+    $('nextMessage').textContent = state.mission === 0 ? '직선 발판 탐험을 마쳤어요.' : '이제 나만의 함수로 자유 탐구를 해봐요.';
+    $('nextButton').innerHTML = state.mission === 0 ? '다음 미션으로 <span aria-hidden="true">→</span>' : '자유 탐구 시작 <span aria-hidden="true">→</span>';
+    $('nextButton').disabled = false;
+  });
+
+  $('nextButton').addEventListener('click', () => switchMission(state.mission === 0 ? 1 : 2));
+  $('tabLinear').addEventListener('click', () => switchMission(0));
+  $('tabQuadratic').addEventListener('click', () => switchMission(1));
+  $('tabExplore').addEventListener('click', () => switchMission(2));
+  $('replayButton').addEventListener('click', () => {
+    state.mission = 0; state.method = 'left'; state.count = 4; state.savedCounts = [4, 50, 12];
+    state.unlocked = false; state.freeUnlocked = false; state.completed = [false, false];
+    state.degree = 2; state.coefficients = [1, 0.5, 0.5, 0, 0]; state.a = -1; state.b = 1;
+    $('degreeSelect').value = '2'; $('intervalStart').value = '-1'; $('intervalEnd').value = '1';
+    renderCoefficientInputs(); renderMission(); window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  $('intervalStart').value = String(state.a); $('intervalEnd').value = String(state.b);
+  renderCoefficientInputs(); renderMission();
+})();
+
+</script>
+  </body>
+</html>
+
